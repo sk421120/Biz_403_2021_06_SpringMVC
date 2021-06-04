@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{HH:mm:ss.SSS}[%-5level] - %m%n</Pattern>
+		</layout>
+	</appender>
+	
+	<root level="ERROR">
+		<appender-ref ref="STOUT"/>
+	</root>
+</configuration>
+<!-- 
+String.format("%s %d", "문자열", 100);
+logback form 패턴
+%m : log.info("문자열") 문자열을 표시하는 패턴
+%n : new line 줄바꿈
+
+TRACE
+DEBUG
+INFO
+WARN
+ERROR
+ -->
