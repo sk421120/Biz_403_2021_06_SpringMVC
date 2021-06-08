@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class BookController {
+public class AuthorController {
 
-	@RequestMapping(value="/books/insert", method=RequestMethod.GET)
+	@RequestMapping(value="/author/insert", method=RequestMethod.GET)
 	public String insert() {
 		
-		return "books/input";
+		return "author/input";
 	}
 }
