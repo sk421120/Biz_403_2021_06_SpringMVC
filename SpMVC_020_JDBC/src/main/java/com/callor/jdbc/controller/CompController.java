@@ -1,11 +1,14 @@
 package com.callor.jdbc.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.callor.jdbc.model.CompVO;
 import com.callor.jdbc.persistance.CompDao;
+import com.callor.jdbc.service.CompService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,9 +17,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value="/comp")
 public class CompController {
 	
-	protected CompDao compDao;
-	public CompController(CompDao compDao) {
+	protected final CompDao compDao;
+	protected final CompService compService;
+	public CompController(CompDao compDao, CompService compService) {
 		this.compDao = compDao;
+		this.compService = compService;
 	}
 	
 	// localhost:8080/jdbc/comp/insert로 호출되는 함수
@@ -29,7 +34,7 @@ public class CompController {
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insert(CompVO cmVO) {
 		log.debug("Company VO {}",cmVO.toString());
-		compDao.insert(cmVO);
+		compService.insert(cmVO);
 		return "redirect:/";
 	}
 	
@@ -38,5 +43,12 @@ public class CompController {
 		compDao.selectById(pk);
 		log.debug(compDao.toString());
 		return "comp/input";
+	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String delete(@RequestParam("cp_code") String code) {
+		compDao.delete(code);
+		log.debug(compDao.toString());
+		return "redirect:/";
 	}
 }
