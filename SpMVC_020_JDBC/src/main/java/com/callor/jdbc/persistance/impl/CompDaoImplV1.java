@@ -42,9 +42,9 @@ public class CompDaoImplV1 implements CompDao{
 			pk
 		};
 		
-		CompVO vo = (CompVO) jdbcTemplate.query(sql, params,
-				new BeanPropertyRowMapper<CompVO>(CompVO.class));
-		
+		CompVO vo = jdbcTemplate.query(sql, params,
+				new BeanPropertyRowMapper<CompVO>(CompVO.class)).get(0);
+		log.debug("comp SELECT ID {}",vo.toString());
 		return vo;	
 
 	}
