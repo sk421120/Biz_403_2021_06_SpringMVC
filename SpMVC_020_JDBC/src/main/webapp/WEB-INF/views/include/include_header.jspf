@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
 header {
    background-color: salmon;
    color: white;
@@ -49,6 +55,36 @@ nav#main_nav li:first-child {
 nav#main_nav li:hover {
    background-color: lightsalmon;
    cursor: pointer;
+}
+
+/* home.jsp에서 중간에 이미지를 표현하는 부분의 CSS 인데
+rootPath 변수 사용관계로 별도의 main_home.css에 둘 수 없어서 여기에 둔다 */
+section#ad_sec article:nth-of-type(1) {
+background: url("${rootPath}/static/images/images_1.jpg") no-repeat;
+background-position: 30% 30%;
+background-size:100%;
+}
+section#ad_sec article:nth-of-type(2) {
+background: url("${rootPath}/static/images/images_2.jpg") no-repeat;
+background-size:100%;
+}
+section#ad_sec article:nth-of-type(3) {
+background: url("${rootPath}/static/images/images_3.jpg") no-repeat;
+background-position: 0% 10%;
+background-size:100%;
+}
+section#ad_sec article:nth-of-type(4) {
+background: url("${rootPath}/static/images/images_4.jpg") no-repeat;
+background-size:100%;
+}
+section#ad_sec article:nth-of-type(5) {
+background: url("${rootPath}/static/images/images_5.jpg") no-repeat;
+background-position: 30% 50%;
+background-size:100%;
+}
+section#ad_sec article:nth-of-type(6) {
+background: url("${rootPath}/static/images/images_6.jpg") no-repeat;
+background-size:100%;
 }
 
 </style>

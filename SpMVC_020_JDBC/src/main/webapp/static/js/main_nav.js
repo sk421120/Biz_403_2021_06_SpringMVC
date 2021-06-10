@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         urlPath += `/member/join`;
       }
 
-      alert(`내가 가야할 곳 ${urlPath}`);
+      // alert(`내가 가야할 곳 ${urlPath}`);
       location.href = urlPath;
     }
   });
