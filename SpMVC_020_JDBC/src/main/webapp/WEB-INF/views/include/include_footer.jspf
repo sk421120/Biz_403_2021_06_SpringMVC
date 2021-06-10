@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="rootPath" value="${pageContext.request.contextPath }" />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+footer {
+   background-color: black;
+   color: white;
+   padding: 5px;
+}
+
+address {
+   text-align: center;
+}
+   </style>
+
+</head>
+<body>
+   <footer>
+      <address>CopyRight &copy; 여기는 이메일이 들어가요</address>
+   </footer>
+</body>
+</html>
