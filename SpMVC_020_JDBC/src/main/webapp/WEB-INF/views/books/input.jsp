@@ -93,12 +93,18 @@ button.btn_book_insert {
 			</div>
 
 			<div class="btn_box">
-				<button type="button" class="btn_book_insert">도서등록</button>
-				<button type="reset" class="btn_book_insert">다시작성</button>
-				<button type="button" class="btn_book_">도서등록</button>
+				<button type="button" class="btn_save book">저장</button>
+				<button type="reset" class="btn_reset book">새로작성</button>
+				<button type="button" class="btn_list book">리스트로</button>
 			</div>
 		</fieldset>
 	</form>
 <%@ include file="/WEB-INF/views/include/include_footer.jspf" %>
 </body>
+<script>
+document.querySelector("button.btn_book_insert")
+	.addEventListener("click",()=>{
+		location.href = "${rootPath}/books/insert";
+});
+</script>
 </html>

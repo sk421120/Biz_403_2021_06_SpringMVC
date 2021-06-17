@@ -15,36 +15,34 @@ button.btn_book_insert {
 	<section class="main_sec">
 		<table>
 			<tr>
-				<th>ISBN</th>
-				<th>도서명</th>
-				<th>출판사</th>
-				<th>저자</th>
-				<th>출판연도</th>
-				<th>가격</th>
-				<th>페이지수</th>
+				<th>CODE</th>
+				<th>출판사명</th>
+				<th>대표</th>
+				<th>전화번호</th>
+				<th>주소</th>
+				<th>주요장르</th>
 			</tr>
 			<tr>
-				<td>ISBN</td>
-				<td>도서명</td>
-				<td>출판사</td>
-				<td>저자</td>
-				<td>출판연도</td>
-				<td>가격</td>
-				<td>페이지수</td>
+				<td>CODE</td>
+				<td>출판사명</td>
+				<td>대표</td>
+				<td>전화번호</td>
+				<td>주소</td>
+				<td>주요장르</td>
 			</tr>
 		</table>
 
 		<div class="btn_box">
-			<button class="btn_insert book">도서등록</button>
+			<button class="btn_insert comp">출판사등록</button>
 		</div>
 	</section>
-
 	<%@ include file="/WEB-INF/views/include/include_footer.jspf"%>
 
 </body>
 <script>
-document.querySelector("button.btn_insert.book").addEventListener("click",()=>{
-		location.href = "${rootPath}/books/insert";
+document.querySelector("button.btn_insert.comp")
+	.addEventListener("click",()=>{
+		location.href = "${rootPath}/comp/insert";
 });
 </script>
 </html>
