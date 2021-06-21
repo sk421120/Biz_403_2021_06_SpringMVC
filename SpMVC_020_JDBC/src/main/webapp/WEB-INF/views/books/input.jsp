@@ -11,6 +11,10 @@ form {
 	margin: 15px auto;
 }
 
+form#book_input input.search {
+	width:30%;
+}
+
 fieldset {
 	border: 1px solid salmon;
 	border-radius: 15px;
@@ -58,10 +62,14 @@ button.btn_book_insert {
 	background-color: lightsalmon;
 }
 </style>
+<script>
+	var rootPath = "${rootPath}"
+</script>
+<script src="${rootPath}/static/js/book_input.js?ver=2021-06-21-005"></script>
 <body>
 	<%@ include file="/WEB-INF/views/include/include_header.jspf"%>
 
-	<form method="POST">
+	<form id="book_input" method="POST">
 		<fieldset>
 			<legend>도서정보 등록</legend>
 			<div>
@@ -73,12 +81,14 @@ button.btn_book_insert {
 					placeholder="도서의 이름을 입력해주세요." />
 			</div>
 			<div>
-				<label>출판사</label> <input name="bk_ccode" id="bk_ccode"
-					placeholder="" />
+				<label>출판사</label>
+				<input class="search" name="bk_ccode" id="bk_ccode" placeholder="" />
+				<span>출판사명</span>
 			</div>
 			<div>
-				<label>저자</label> <input name="bk_acode" id="bk_acode"
-					placeholder="" />
+				<label>저자</label>
+				<input class="search" name="bk_acode" id="bk_acode" placeholder="" />
+				<span>저자명</span>
 			</div>
 			<div>
 				<label>출판일</label> <input name="bk_date" id="bk_date" placeholder="" />
@@ -101,10 +111,4 @@ button.btn_book_insert {
 	</form>
 <%@ include file="/WEB-INF/views/include/include_footer.jspf" %>
 </body>
-<script>
-document.querySelector("button.btn_book_insert")
-	.addEventListener("click",()=>{
-		location.href = "${rootPath}/books/insert";
-});
-</script>
 </html>

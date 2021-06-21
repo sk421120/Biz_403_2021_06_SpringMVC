@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
-<%@ include file="/WEB-INF/views/include/include_head.jspf" %>
+<%@ include file="/WEB-INF/views/include/include_head.jspf"%>
 <style>
 button.btn_book_insert {
 	background-color: lightsalmon;
 }
 </style>
 <body>
-	<%@ include file="/WEB-INF/views/include/include_header.jspf" %>
+	<%@ include file="/WEB-INF/views/include/include_header.jspf"%>
 	<section class="main_sec">
 		<table>
 			<tr>
@@ -22,14 +22,24 @@ button.btn_book_insert {
 				<th>주소</th>
 				<th>주요장르</th>
 			</tr>
-			<tr>
-				<td>CODE</td>
-				<td>출판사명</td>
-				<td>대표</td>
-				<td>전화번호</td>
-				<td>주소</td>
-				<td>주요장르</td>
-			</tr>
+			<c:choose>
+				<c:when test="${empty COMPS}">
+					<tr>
+						<td cospan="6">데이터가 없음</td>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${COMPS}" var="COMP" varStatus="seq">
+						<tr>
+							<td>CODE</td>
+							<td>출판사명</td>
+							<td>대표</td>
+							<td>전화번호</td>
+							<td>주소</td>
+							<td>주요장르</td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
 		</table>
 
 		<div class="btn_box">
@@ -40,8 +50,7 @@ button.btn_book_insert {
 
 </body>
 <script>
-document.querySelector("button.btn_insert.comp")
-	.addEventListener("click",()=>{
+document.querySelector("button.btn_insert.comp").addEventListener("click",()=>{
 		location.href = "${rootPath}/comp/insert";
 });
 </script>

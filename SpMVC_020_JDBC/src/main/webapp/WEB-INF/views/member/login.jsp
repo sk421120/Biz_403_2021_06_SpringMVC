@@ -17,6 +17,15 @@ margin :80px auto;
 background-color: #dfdfdf;
 text-align: center;
 border-radius: 30px;
+z-index: 500;
+
+position:absolute;
+top:50%;
+left:50%;
+transform: translate(-50%, -50%);
+
+animation-name:aniTopDown;
+animation-duration:0.3s;
 }
 
 form#login_form h2{
@@ -78,7 +87,24 @@ form#login_form div.msg {
 		
 		font-size:20px;
 	
+}
+
+@keyframes aniTopDown {
+	from {
+		top :-300px;
+		opacity: 0;
 	}
+	
+	to {
+		top:50%;
+		transform : translateY(-50%);
+		opacity: 1;
+	}
+}
+
+div#modal {
+display:block;
+}	
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/include/include_header.jspf" %>

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.callor.jdbc.service.HomeService;
 import com.callor.jdbc.service.RentService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,13 +31,15 @@ public class HomeController {
 	 */
 //	protected BookDao bookDao;
 	protected RentService rentService;
+	protected HomeService homeService;
 	
-	public HomeController(RentService rentService) {
+	public HomeController(RentService rentService, HomeService homeService) {
 		this.rentService = rentService;
+		this.homeService = homeService;
 	}
 	/*
 	 * 사용자에게 Response를 할때
-	 * forward방법과 redirec방법이 있다
+	 * forward방법과 redirect방법이 있다
 	 * 
 	 * forwarding은
 	 * service 등등에서 생성한(조회한) 데이터를
@@ -63,7 +66,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
+		homeService.dashBoard(model);
 		/*
 		 * 매개변수로 전달받은 Model class type변수인 model에 속성을 하나 추가한다.
 		 * 속성의 이름은 user 이며, 값은 user_name에 담긴 값이다
