@@ -42,12 +42,18 @@ public class CompController {
 		return "comp/list";
 	}
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String getList(Model model) {
-		List<CompVO> compList = compService.selectAll();
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	public String getList(@RequestParam(name="cp_title", required = false, defaultValue="") String searchText,
+			Model model) {
+		List<CompVO> compList =null;
+		if(searchText==null || searchText.trim().equals("")) {
+			compList = compService.selectAll();	
+		} else {
+			compList = compService.findByTitleAndCeoAndTel(searchText);
+		}
 		
 		model.addAttribute("COMPS", compList);
-		return "comp/list";
+		return "comp/search";
 	}
 	
 	// localhost:8080/jdbc/comp/insert로 호출되는 함수

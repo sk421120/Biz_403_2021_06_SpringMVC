@@ -29,7 +29,19 @@ public class BookDaoImplV1 implements BookDao{
 	@Override
 	public List<BookVO> selectAll() {
 		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM tbl_books ";
+		String sql = "SELECT ";
+		sql+=" bk_isbn,";
+		sql+=" CP.cp_title as bk_ccode,";
+		sql+=" AU.au_name as bk_acode,";
+		sql+=" bk_title,";
+		sql+=" bk_date,";
+		sql+=" bk_pages,";
+		sql+=" bk_price ";
+		sql += " FROM tbl_books BK";
+		sql += " LEFT JOIN tbl_author AU";
+		sql += " ON BK.bk_acode = AU.au_code ";
+		sql += " LEFT JOIN tbl_company CP";
+		sql += " ON BK.bk_ccode = CP.cp_code ";
 		/*
 		 * jdbcTemplate.query(sql,return type)
 		 * sql문을 실행한 후 return type형태로 데이터를 변환하여 return 해달라
@@ -44,7 +56,8 @@ public class BookDaoImplV1 implements BookDao{
 	@Override
 	public BookVO selectById(String pk) {
 		// TODO Auto-generated method stub
-//		String sql = "SELECT * FROM tbl_books ";
+		String sql = "SELECT * FROM tbl_books ";
+		
 		
 //		BookVO books = jdbcTemplate.query(sql,BookVO());
 		return null;
@@ -53,7 +66,27 @@ public class BookDaoImplV1 implements BookDao{
 	@Override
 	public int insert(BookVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		String sql = " INSERT INTO tbl_books ";
+		sql+="( bk_isbn,";
+		sql+=" bk_ccode,";
+		sql+=" bk_acode,";
+		sql+=" bk_title,";
+		sql+=" bk_date,";
+		sql+=" bk_pages,";
+		sql+=" bk_price )";
+		sql+=" VALUES (?,?,?,?,?,?,?)";
+		
+		Object[] params = new Object[] {
+				vo.getBk_isbn(),
+				vo.getBk_ccode(),
+				vo.getBk_acode(),
+				vo.getBk_title(),
+				vo.getBk_date(),
+				vo.getBk_pages(),
+				vo.getBk_price()
+		};
+		// insert, update, delete 모두 jdbcTemplate.update() method 사용
+		return jdbcTemplate.update(sql,params);
 	}
 
 	@Override

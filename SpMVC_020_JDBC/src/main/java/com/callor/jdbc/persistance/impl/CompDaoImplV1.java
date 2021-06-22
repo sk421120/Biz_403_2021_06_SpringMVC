@@ -114,8 +114,7 @@ public class CompDaoImplV1 implements CompDao{
 	 * 권장사항으로 매개변수는 wrapper class type으로 설정
 	 * 즉 숫자형일경우 int, long > Integer, Long 형으로 선언
 	 * 
-	 * vo에 담겨서 전달된 값은 Object[] 배열로 변환한 후
-	 * jdbcTemplate 에 전달해 주어야 한다
+	 * vo에 담겨서 전달된 값은 Object[] 배열로 변환한 후 jdbcTemplate 에 전달해 주어야 한다
 	 * 
 	 * 하지만, 1 ~ 2개 정도의 값을 전달할때 Object[] 배열로 변환 후
 	 * 전달을 하면 Object 객체 저장소가 생성되고 메모리를 사용한다
@@ -138,7 +137,7 @@ public class CompDaoImplV1 implements CompDao{
 	public List<CompVO> findByCName(String cname) {
 		// TODO 출판사 이름으로 검색하기
 		String sql = " SELECT * FROM tbl_company ";
-		sql += " WHERE cp_name LIKE CONCAT( '%', ?, '%' ) ";
+		sql += " WHERE cp_title LIKE CONCAT( '%', ?, '%' ) ";
 		
 		// SELECT를 수행한 후 각각의 데이터를 CompVO에 담고
 		//List에 add하여 return 한 후 compList에 받기
@@ -151,13 +150,26 @@ public class CompDaoImplV1 implements CompDao{
 	@Override
 	public List<CompVO> findByTel(String tel) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = " SELECT * FROM tbl_company ";
+		sql += " WHERE cp_tel LIKE CONCAT( '%', ?, '%' ) ";
+		
+		List<CompVO> compList = jdbcTemplate.query(sql, new Object[] { tel },
+				new BeanPropertyRowMapper<CompVO>(CompVO.class));
+		
+		return compList;
 	}
 
 	@Override
 	public List<CompVO> findByCeo(String ceo) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = " SELECT * FROM tbl_company ";
+		sql += " WHERE cp_ceo LIKE CONCAT( '%', ?, '%' ) ";
+		
+		// SELECT를 수행한 후 각각의 데이터를 CompVO에 담고
+		//List에 add하여 return 한 후 compList에 받기
+		List<CompVO> compList = jdbcTemplate.query(sql, new Object[] { ceo },
+				new BeanPropertyRowMapper<CompVO>(CompVO.class));
+		
+		return compList;
 	}
 
 //	tbl_company table에서 cpcode(출판사코드) 중 가장 큰 값을 추출하기
