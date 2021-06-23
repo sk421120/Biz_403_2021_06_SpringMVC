@@ -31,8 +31,8 @@ public class BookDaoImplV1 implements BookDao{
 		// TODO Auto-generated method stub
 		String sql = "SELECT ";
 		sql+=" bk_isbn,";
-		sql+=" CP.cp_title as bk_ccode,";
-		sql+=" AU.au_name as bk_acode,";
+		sql+=" CONCAT( '(', bk_ccode, ')', CP.cp_title ) as bk_ccode, ";
+		sql+=" CONCAT( '(', bk_acode, ')', AU.au_name ) as bk_acode,";
 		sql+=" bk_title,";
 		sql+=" bk_date,";
 		sql+=" bk_pages,";

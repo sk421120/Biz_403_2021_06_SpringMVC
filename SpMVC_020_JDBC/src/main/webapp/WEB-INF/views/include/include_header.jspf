@@ -8,11 +8,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-h1.page_title {
-	width: 90%;
-	margin: 10px auto;
-}
-
 nav#main_nav {
    background-color: darkgreen;
    color: white;
