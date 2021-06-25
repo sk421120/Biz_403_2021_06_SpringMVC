@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.callor.score.model.ScoreInputVO;
 import com.callor.score.model.StudentVO;
-import com.callor.score.model.SubjectAndScoreDTO;
 import com.callor.score.service.ScoreService;
 import com.callor.score.service.StudentService;
 
@@ -59,12 +59,29 @@ public class StudentController {
 	
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public String detail(String st_num, Model model) {
-		List<SubjectAndScoreDTO> ssList = 
-				scService.selectScore(st_num);
+//		List<SubjectAndScoreDTO> ssList = 
+//				scService.selectScore(st_num);
+		String ret = stService.detail(model, st_num);
+//		model.addAttribute("SSLIST", ssList);
+//		model.addAttribute("STUDENT", stService.findById(st_num));
+		if(ret.equals("OKOK")) {
+			model.addAttribute("BODY", "STUDENT_DETAIL");	
+		} else {
+			model.addAttribute("BODY", "STUDENT_INPUT");
+		}
 		
-		model.addAttribute("SSLIST", ssList);
-		model.addAttribute("STUDENT", stService.findById(st_num));
-		model.addAttribute("BODY", "STUDENT_DETAIL");
+		return "home";
+	}
+	
+	@RequestMapping(value="/detail", method=RequestMethod.POST)
+//	public String detail(
+//			@RequestParam(name="subject") List<String> subject,
+//			@RequestParam(name="score") List<String> score ) {
+//		log.debug("Subject {}", subject.toString());
+//		log.debug("Score {}", score.toString());
+	public String detail(ScoreInputVO scInputVO ) {
+		log.debug(scInputVO.toString());
+		String ret = stService.scoreInput(scInputVO);
 		return "home";
 	}
 }

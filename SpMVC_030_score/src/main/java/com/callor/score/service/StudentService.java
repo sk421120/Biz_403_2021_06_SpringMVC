@@ -3,6 +3,9 @@ package com.callor.score.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.ui.Model;
+
+import com.callor.score.model.ScoreInputVO;
 import com.callor.score.model.StudentVO;
 
 public interface StudentService {
@@ -16,5 +19,7 @@ public interface StudentService {
 	public String makeStNum();
 	public String makeStNum(String prefix);
 
-	public StudentVO findById(String st_num);
+	public String detail(Model model, String st_num);
+
+	public String scoreInput(ScoreInputVO scInputVO);
 }

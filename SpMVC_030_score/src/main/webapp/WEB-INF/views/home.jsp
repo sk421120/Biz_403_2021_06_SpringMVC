@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale: 1;">
+<meta name="viewport" content="width=device-width, initial-scale: 1"/>
 <title>Insert title here</title>
 <style>
 * {
@@ -94,27 +94,7 @@ td.number {
 	text-align: right;
 }
 
-div.btn_box {
-	width: 90%;
-	/* table의 margin 10px auto로 설정되어 있기 때문에 top-margin은 0으로 bottom-margin은 10px 좌우는 auto */
-	margin: 0px auto 10px auto;
-	padding: 5px;
-	text-align: right;
-}
-
-div.btn_box button {
-	border: 0;
-	outline: 0;
-	padding: 12px 16px;
-	margin-left: 10px;
-	border-radius: 5px;
-}
-
-button:hover {
-	box-shadow: 2px 2px 2px 2px black;
-	cursor: pointer;
-}
-
+/* form */
 form {
 	width:90%;
 	margin:0 auto 10px auto;
@@ -147,18 +127,62 @@ border-radius: 50px;
 form input:hover {
 background-color: lightsalmon;
 }
-form button.save {
-background-color: salmon;
-color:white;
+
+/* button */
+div.btn_box {
+	width: 90%;
+	/* table의 margin 10px auto로 설정되어 있기 때문에 top-margin은 0으로 bottom-margin은 10px 좌우는 auto */
+	margin: 0px auto 10px auto;
+	padding: 5px;
+	text-align: right;
 }
-form button.reset {
-background-color: white;
-color:black;
+
+div.btn_box button {
+	border: 0;
+	outline: 0;
+	padding: 12px 16px;
+	margin-left: 10px;
+	border-radius: 5px;
 }
-form button.list {
-background-color: lightgreen;
-color:white;
+
+button.home {
+	background-color: lightsalmon;
+	color:white;
 }
+	
+button.update {
+	background-color: lightorange;
+}
+	
+button.delete {
+	background-color: darkgreen; 
+}
+
+button.insert {
+	background-color: orange;
+	color: white;
+}
+
+button.save {
+	background-color: salmon;
+	color:white;
+}
+
+button.reset {
+	background-color: white;
+	color:black;
+}
+
+button.student.list {
+	background-color: lightgreen;
+	color:white;
+}
+
+button:hover {
+	box-shadow: 2px 2px 2px 2px black;
+	cursor: pointer;
+}
+
 </style>
 </head>
 <body>
@@ -221,5 +245,21 @@ if(home) {
 //document.querySelector("button.student.home").addEventListener("click",(e)=> {
 //	location.href="${rootPath}"
 //});
+
+let table= document.querySelector("table.detail");
+if(table) {
+	table.addEventListener("click", (e)=>{
+		let target = e.target
+		let tagName = target.tagName
+	
+		if(tagName === "TD") {
+			let tr = target.closest("TR")
+			let stNum = tr.dataset.stnum
+		
+			location.href = "${rootPath}/student/detail?st_num="+ stNum
+			//alert(stNum)
+		}
+	})
+}
 </script>
 </html>

@@ -3,6 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.callor.score.dao.ext.ScoreDao">
+  <select id="scoreCount" resultType="Integer">
+   SELECT COUNT(*) FROM tbl_score
+   	WHERE sc_stnum = #{st_num}
+  </select>
+  <select id="scoreSum" resultType="Integer">
+   SELECT SUM(sc_score) FROM tbl_score
+   	WHERE sc_stnum = #{st_num}
+  </select>
   <select id="selectAll" resultType="ScoreVO">
   	SELECT * FROM tbl_score
   </select>
@@ -40,6 +48,14 @@
   	INSERT INTO tbl_score (
   		 sc_stnum, sc_sbcode, sc_score )
   	VALUES ( #{sc_stnum}, #{sc_sbcode}, #{sc_score} )
+  </insert>
+  <insert id="insertOrUpdate">
+  	INSERT INTO tbl_score(sc_stnum, sc_sbcode, sc_score)
+  		VALUES( #{st_num}, #{sc_sbcode}, #{sc_score} )
+  		
+  		ON DUPLICATE KEY UPDATE
+  			sc_stnum = #{st_num},
+  			sc_sbcode = #{sc_sbcode}
   </insert>
   
   <update id="update" parameterType="ScoreVO">
