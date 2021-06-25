@@ -11,4 +11,10 @@ public interface StudentService {
 	public Map<String, Object> selectMaps();
 
 	public int insert(StudentVO vo);
+	public int update(StudentVO vo);
+	
+	public String makeStNum();
+	public String makeStNum(String prefix);
+
+	public StudentVO findById(String st_num);
 }

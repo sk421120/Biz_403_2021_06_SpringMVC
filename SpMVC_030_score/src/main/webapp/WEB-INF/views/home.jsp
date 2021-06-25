@@ -69,7 +69,7 @@ tr:last-child {
 }
 
 tr:nth-of-type(odd) {
-	background-color: #eeeeee:
+	background-color:#eee; 
 }
 
 tr:nth-of-type(even) {
@@ -176,6 +176,9 @@ color:white;
 			</c:when>
 			<c:when test="${BODY == 'STUDENT_INPUT'}">
 				<%@ include file="/WEB-INF/views/student/input.jsp" %>
+			</c:when>
+			<c:when test="${BODY == 'STUDENT_DETAIL'}">
+				<%@ include file="/WEB-INF/views/student/detail.jsp" %>
 			</c:when>
 			<c:otherwise>
 				<%@ include file="/WEB-INF/views/main.jsp" %>
