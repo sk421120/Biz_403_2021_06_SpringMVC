@@ -35,6 +35,42 @@ header {
 	padding: 2rem;
 }
 
+nav {
+	background-color: black;
+	color:white;
+	width:100wv;
+}
+
+nav.fixed {
+	position : fixed;
+	top:0;
+	left:0;
+	right:10px;
+	border-bottom-right-radius: 20px; 
+	box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+}
+
+nav ul {
+	list-style: none;
+	display: flex;
+	margin:0 20px;
+}
+
+nav li {
+	padding:16px 12px;
+	border-bottom: 3px solid transparent;
+	transition:1s;
+	cursor: pointer;
+}
+
+nav li:hover {
+	border-bottom: 3px solid yellow;
+}
+
+nav li:nth-last-of-type(2) {
+	margin:left;
+}
+
 section#main_sec {
 	width: 100wv;
 	height:70vh;
@@ -43,6 +79,7 @@ section#main_sec {
 	background: linear-gradient(to bottom, salmon, salmon, #fcdb03);
 	background-size: 100% 100%;
 	background-attachment: fixed;
+	overflow:auto;
 }
 
 h2 {
@@ -183,6 +220,7 @@ button:hover {
 	cursor: pointer;
 }
 
+
 </style>
 </head>
 <body>
@@ -190,6 +228,14 @@ button:hover {
 	<h1>대한고교 성적처리 2021</h1>
 	<p>대한고교 성적처리 시스템 2021 V1</p>
 </header>
+<nav id="main_nav">
+	<ul>
+		<li>HOME</li>
+		<li>로그인</li>
+		<li>로그아웃</li>
+		<li>관리자</li>
+	</ul>
+</nav>
 	<section id="main_sec">
 		<c:choose>
 			<c:when test="${BODY == 'SCORE_VIEW'}">
@@ -261,5 +307,26 @@ if(table) {
 		}
 	})
 }
+
+let main_nav = document.querySelector("nav#main_nav")
+let main_header = document.querySelector("header")
+
+// header box의 높이가 얼마냐
+let main_header_height = main_header.offsetHeight;
+
+document.addEventListener("scroll",()=>{
+	// HTML 문서 전체의 크기, 좌표 등을 추출하기
+	
+	let doc_bound = document.querySelector("HTML")
+		.getBoundingClientRect();
+	
+	let doc_top = doc_bound.top
+	
+	if(doc_top < main_header_height * -1) {
+		main_nav.classList.add("fixed")
+	} else {
+		main_nav.classList.remove("fixed")		
+	}
+})
 </script>
 </html>

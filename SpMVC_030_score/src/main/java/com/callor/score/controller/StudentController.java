@@ -79,9 +79,17 @@ public class StudentController {
 //			@RequestParam(name="score") List<String> score ) {
 //		log.debug("Subject {}", subject.toString());
 //		log.debug("Score {}", score.toString());
-	public String detail(ScoreInputVO scInputVO ) {
-		log.debug(scInputVO.toString());
+	public String detail(ScoreInputVO scInputVO) {
+		log.debug("Score Input {}", scInputVO.toString());
 		String ret = stService.scoreInput(scInputVO);
+		/*
+		 * redirect를 수행할때 query string을 보내고 싶으면
+		 * 해당 변수와 값을 model에 속성(Attribute)로 추가(add)
+		 * 
+		 * redirect:/student/detail?st_num=" + st_num와
+		 * 같이 사용하지 않아도 된다
+		 */
+		
 		return "home";
 	}
 }
