@@ -1,38 +1,39 @@
 package com.callor.book.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- * Handles requests for the application home page.
- */
+import com.callor.book.service.NaverService;
+import com.callor.book.service.model.BookDTO;
+
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	protected final NaverService<BookDTO> nBookService;
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String home(@RequestParam(name="search", required = false,
+		defaultValue = "")String search, Model model) throws MalformedURLException, IOException, ParseException {
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+		if(search != null && !search.equals("")) {
+			String queryURL = nBookService.queryURL(search.trim());
+			String jsonString = nBookService.getJsonString(queryURL);
+			
+			List<BookDTO> bookList = nBookService.getNaverList(jsonString);
+			
+			model.addAttribute("BOOKS", bookList);
+		}
 		return "home";
 	}
 	
