@@ -16,32 +16,23 @@ import com.callor.book.service.NaverService;
 import com.callor.book.service.model.BookDTO;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
-public class HomeController {
-	
+@RequestMapping(value="/book")
+public class NaverBookController {
+
 	@Qualifier("naverServiceV2")
 	protected final NaverService<BookDTO> nBookService;
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String home(
-			@RequestParam(name="category",required = false, defaultValue = "") String category, Model model) {
+	@RequestMapping(value={"/",""}, method=RequestMethod.GET)
+	public String home(@RequestParam(name="search", required = false,
+			defaultValue = "")String search, Model model)
+					throws MalformedURLException, IOException, ParseException {
 		
-//		model.addAttribute("CAT",category);
-		if(category.equalsIgnoreCase("BOOK")) {
-			return "redirect:/book";
-		} else if(category.equalsIgnoreCase("MOVIE")) {
-			return "redirect:/movie";
-		} else if(category.equalsIgnoreCase("NEWS")) {
-			return "redirect:/news";
-		}
-		return "redirect:/book";
-	}
-	
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home1(@RequestParam(name="search", required = false,
-		defaultValue = "")String search, Model model) throws MalformedURLException, IOException, ParseException {
+		model.addAttribute("pHolder", "도서 검색어");
 		
 		if(search != null && !search.equals("")) {
 			String queryURL = nBookService.queryURL(search.trim());
@@ -51,7 +42,7 @@ public class HomeController {
 			
 			model.addAttribute("BOOKS", bookList);
 		}
+		
 		return "home";
 	}
-	
 }
