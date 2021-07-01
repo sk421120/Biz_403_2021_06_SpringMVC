@@ -1,4 +1,4 @@
-package com.callor.book.service.model;
+package com.callor.book.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -4,19 +4,19 @@
 <c:set var="rootPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 
-<c:forEach items="${MOVIES}" var="MOVIE">
+<c:forEach items="${BOOKS}" var="BOOK">
 	<div class="content">
-		<img src="${MOVIE.image}">
+		<img src="${BOOK.image}">
 		<div>
 			<p class="title">
-				<a href="${MOVIE.link}" target="_NEW">${MOVIE.title}</a>
+				<a href="${BOOK.link}" target="_NEW">${BOOK.title}</a>
 			</p>
-			<p class="desc">${MOVIE.pubDate}</p>
+			<p class="desc">${BOOK.description}</p>
 			<p class="author">
-				<strong>감독 </strong>${MOVIE.director}</p>
+				<strong>저자</strong>${BOOK.author}</p>
 			<p class="publisher">
-				<strong>출연배우 </strong>${MOVIE.actor}</p>
-			<button class="insert">내 영화 등록</button>
+				<strong>출판사 : </strong>${BOOK.publisher}</p>
+			<button class="insert">내 서재 등록</button>
 		</div>
 	</div>
 </c:forEach>

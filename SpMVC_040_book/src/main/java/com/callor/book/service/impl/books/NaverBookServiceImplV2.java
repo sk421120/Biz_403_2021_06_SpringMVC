@@ -1,11 +1,11 @@
-package com.callor.book.service.impl;
+package com.callor.book.service.impl.books;
 
 import java.util.List;
 
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
-import com.callor.book.service.model.BookDTO;
+import com.callor.book.model.BookDTO;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -27,8 +27,8 @@ import lombok.extern.slf4j.Slf4j;
  * ServiceV2에서는 getNaverList() method를 다시 작성하여 gson을 사용하여 JSON parsing을 수행하는 코드 작성
  */
 @Slf4j
-@Service("naverServiceV2")
-public class NaverServiceImplV2 extends NaverServiceImplV1 {
+@Service("naverBookServiceV2")
+public class NaverBookServiceImplV2 extends NaverBookServiceImplV1 {
 	
 	// gSon을 사용하여 jsonString을 parsing 하기
 	@Override

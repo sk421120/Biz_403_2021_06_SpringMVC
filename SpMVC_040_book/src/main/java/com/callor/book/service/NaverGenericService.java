@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import org.json.simple.parser.ParseException;
+import org.springframework.ui.Model;
 
 /*
  * Naver의 OpenAPI를 통해서 데이터를 검색하는 서비스
@@ -19,7 +20,7 @@ import org.json.simple.parser.ParseException;
  * 
  * 그래서 인터페이스에 Generic을 선언하여 VO별로 필요에 따라 클래스를 만들 수 있도록 한다
  */
-public interface NaverService<T> {
+public interface NaverGenericService<T> {
 	
 	// 검색 문자열을 받아서 검색을 위한 URL을 생성하여 return
 	public String queryURL(String search_text);
