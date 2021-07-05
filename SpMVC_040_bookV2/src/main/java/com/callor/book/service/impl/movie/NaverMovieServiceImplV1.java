@@ -11,6 +11,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
+import com.callor.book.config.NaverQualifier;
 import com.callor.book.config.NaverSecret;
 import com.callor.book.model.MovieDTO;
 import com.callor.book.service.NaverAbstractService;
@@ -22,11 +23,11 @@ import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service("naverMovieServiceV1")
+@Service(NaverQualifier.NAVER_MOVIE_SERVICE_V1)
 public class NaverMovieServiceImplV1 extends NaverAbstractService<MovieDTO>{
 
-	@Override
-	public String queryURL(String search_text) {
+	
+	public String queryURLV1(String search_text) {
 
 		String searchUTF8 = null;
 		
@@ -49,6 +50,19 @@ public class NaverMovieServiceImplV1 extends NaverAbstractService<MovieDTO>{
 		log.debug("queryURL {} ", queryURL.toString());
 		
 		return queryURL.toString();
+	}
+	
+	@Override
+	public String queryURL(String search_text) throws UnsupportedEncodingException {
+		String searchUTF8 = URLEncoder.encode(search_text, "UTF-8");
+		
+		String queryURL = NaverSecret.Nurl.MOVIE;
+		queryURL += "?query=%s&display=10";
+		
+		queryURL = String.format(queryURL, searchUTF8);
+		
+		log.debug(queryURL);
+		return queryURL;
 	}
 
 	@Override

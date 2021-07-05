@@ -6,17 +6,15 @@
 
 <c:forEach items="${NEWS_LIST}" var="NEWS">
 	<div class="content">
-		<img src="${NEWS.image}">
 		<div>
 			<p class="title">
 				<a href="${NEWS.link}" target="_NEW">${NEWS.title}</a>
 			</p>
 			<p class="desc">${NEWS.description}</p>
 			<p class="author">
-				<strong>기자</strong>${NEWS.author}</p>
-			<p class="publisher">
-				<strong>출판사 : </strong>${NEWS.publisher}</p>
-			<button class="insert">내 뉴스 등록</button>
+				<strong>시간</strong>${NEWS.pubDate}</p>
+			<p><a href="${NEWS.originallink}" target="_NEW">
+			<strong>언론사바로가기</strong></a> </p>
 		</div>
 	</div>
 </c:forEach>

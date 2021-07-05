@@ -1,5 +1,13 @@
 package com.callor.book.dao;
 
-public class GenericDao {
+import java.util.List;
 
+public interface GenericDao<VO, PK> {
+	public List<VO> selectAll();
+	public VO findById(PK pk);
+	public List<VO> findBySearch(String search);
+	
+	public int insert(VO vo);
+	public int update(VO vo);
+	public int delete(VO vo);
 }
