@@ -19,5 +19,18 @@
 	</div>
 	<button>전송</button>
 </form>
+<c:if test="${not empty FILES }">
+<c:forEach items="${FILES}" var="FILE">
+<a href="${rootPath}/files/${FILE}" target="_NEW">
+	<img src="${rootPath}/files/${FILE}" width="200px"/>
+</a>
+</c:forEach>
+</c:if>
+
+<c:if test="${not empty ONEF}">
+<a href="${rootPath}/files/${ONEF}" target="_NEW">
+<img src="${rootPath}/files/${ONEF}" width="200px"/>
+</a>
+</c:if>
 </body>
 </html>
