@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.callor.gallery.model.FileDTO;
 import com.callor.gallery.model.GalleryDTO;
+import com.callor.gallery.model.GalleryFilesDTO;
 import com.callor.gallery.persistance.ext.FileDao;
 import com.callor.gallery.persistance.ext.GalleryDao;
 import com.callor.gallery.service.FileService;
@@ -85,11 +86,20 @@ public class GalleryServiceImplV1 implements GalleryService {
 		}
 		
 		log.debug("Images {}", files.toString());
+		
+		fDao.insertOrUpdateWithList(files);
 	}
 
 	@Override
 	public List<GalleryDTO> selectAll() throws Exception {
-		return gDao.selectAll();
+		List<GalleryDTO> gaList = gDao.selectAll();
+		log.debug("Gallery List {}", gaList.toString());
+		return gaList;
+	}
+
+	@Override
+	public List<GalleryFilesDTO> findByIdGalleryFiles(Long g_seq) {
+		return gDao.findByIdGalleryFiles(g_seq);
 	}
 
 }
