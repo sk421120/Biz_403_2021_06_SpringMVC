@@ -61,13 +61,13 @@ public class GalleryServiceImplV1 implements GalleryService {
 		// DTO에 이미지 이름을 저장하기
 		gDTO.setG_image(strUUID);
 		
-		log.debug("Insert 전 seq {}", gDTO.getG_seq());
+//		log.debug("Insert 전 seq {}", gDTO.getG_seq());
 		// GalleryDTO에 담긴 데이터를 tbl_gallery table에 insert 하기
 		// mapper에서 insert를 수행한 후 새로 생성된 g_seq값을 selectKey 하여
 		// 	gDTO의 g_seq 변수에 담아놓은 상태이다
 		gDao.insert(gDTO);
 		
-		log.debug("Insert 후 seq {}", gDTO.getG_seq());
+//		log.debug("Insert 후 seq {}", gDTO.getG_seq());
 		
 		// 갤러리 게시판seq 값과 파일들을 묶음으로 insert 하기 위한 준비하기
 		Long g_seq = gDTO.getG_seq();
@@ -85,7 +85,7 @@ public class GalleryServiceImplV1 implements GalleryService {
 			files.add(fDto);
 		}
 		
-		log.debug("Images {}", files.toString());
+//		log.debug("Images {}", files.toString());
 		
 		fDao.insertOrUpdateWithList(files);
 	}
@@ -93,7 +93,7 @@ public class GalleryServiceImplV1 implements GalleryService {
 	@Override
 	public List<GalleryDTO> selectAll() throws Exception {
 		List<GalleryDTO> gaList = gDao.selectAll();
-		log.debug("Gallery List {}", gaList.toString());
+//		log.debug("Gallery List {}", gaList.toString());
 		return gaList;
 	}
 
