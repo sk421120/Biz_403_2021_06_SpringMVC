@@ -44,10 +44,33 @@
 		padding:10px;
 		background-color: lightsalmon;
 		color: white;
+		transition:0.3s;
+		position:relative;
+	}
+	nav#main_nav ul li:hover {
+		background-color:rgba(255,255,255,0.2);
+		cursor: pointer;
 	}
 	
-	nav#main_nav ul li:nth-child(2) {
+	nav li#login, nav li#logout {
 		margin-left:auto;
+	}
+	
+	nav li:after {
+		content:'';
+		position:absolute;
+		
+		left:0;
+		bottom:0;
+		height:0;
+		width: 0;
+		
+		transition: width 0.7s
+	}
+	
+	nav li:hover:after {
+		border-bottom: 5px solid white;
+		width:100%;
 	}
 	
 	section.gallery_section {
@@ -79,6 +102,9 @@
 	<c:when test="${BODY eq 'GA_DETAIL'}">
 		<%@ include file="/WEB-INF/views/gallery/detail.jsp" %>
 	</c:when>
+	<c:when test="${BODY eq 'GA_DETAIL_V2'}">
+		<%@ include file="/WEB-INF/views/gallery/detail2.jsp" %>
+	</c:when>
 	<c:when test="${BODY eq 'JOIN'}">
 		<%@ include file="/WEB-INF/views/member/join.jsp" %>
 	</c:when>
@@ -102,7 +128,7 @@ if(main_nav) {
 			if(menu.id === "join") {
 				location.href="${rootPath}/member/" + menu.id
 			} else if(menu.id === "login") {
-				location.href="${rootPath}/member/" + menu.id
+				location.href="${rootPath}/member/" + menu.id +"/nav"
 			} else if(menu.id === "logout") {
 				location.href="${rootPath}/member/" + menu.id
 			} else if(menu.id === "image_create") {

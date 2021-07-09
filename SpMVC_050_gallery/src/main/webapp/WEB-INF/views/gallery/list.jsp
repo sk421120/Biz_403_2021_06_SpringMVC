@@ -33,11 +33,15 @@
 
 <c:forEach items="${GALLERYS}" var="GALLERY">
 <div class="gallery_box">
-
 	<div>
-		<a href="${rootPath}/gallery/detail/${GALLERY.g_seq}">
-		<img src="${rootPath}/files/${GALLERY.g_image}" width="500px">
-		</a>
+	<a href="${rootPath}/gallery/detail/${GALLERY.g_seq}">
+		<c:if test="${empty GALLERY.g_image}">
+			<img src="${rootPath}/files/noImage.jpg" width="500px">
+		</c:if>
+		<c:if test="${not empty GALLERY.g_image}">
+			<img src="${rootPath}/files/${GALLERY.g_image}" width="500px">
+		</c:if>
+	</a>
 	</div>
 	<div>
 		<h3><a href="${rootPath}/gallery/detail/${GALLERY.g_seq}">
