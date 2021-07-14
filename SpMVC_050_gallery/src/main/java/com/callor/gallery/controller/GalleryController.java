@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -59,9 +60,19 @@ public class GalleryController {
 	}
 	
 	@RequestMapping(value={"/",""}, method=RequestMethod.GET)
-	public String list(Model model) throws Exception {
-		List<GalleryDTO> gList = gService.selectAll();
+	public String list(@RequestParam(value="pageNum", required=false, defaultValue="1")
+		String pageNum, Model model) throws Exception {
+		
+		int intPageNum = Integer.valueOf(pageNum);
+		
+		List<GalleryDTO> gList = gService.selectAllPage(intPageNum);
+		
+//		List<GalleryDTO> gList = gService.selectAll();
 //		log.debug("Gallery List {}", gList.toString());
+		
+		if(intPageNum > 0 ) {
+			model.addAttribute("PAGE_NUM", intPageNum);
+		}
 		model.addAttribute("GALLERYS", gList);
 		model.addAttribute("BODY", "GA_LIST");
 		return "home";
@@ -143,10 +154,10 @@ public class GalleryController {
 	public String delete(@RequestParam("g_seq") String seq, HttpSession session){
 		
 		// 삭제 요구 > 로그인 되었나 확인
-		MemberVO memVO = (MemberVO) session.getAttribute("MEMBER");
-		if(memVO == null) {
-			return "redirect:/member/login";
-		}
+//		MemberVO memVO = (MemberVO) session.getAttribute("MEMBER");
+//		if(memVO == null) {
+//			return "redirect:/member/login";
+//		}
 		
 		Long g_seq = 0L;
 		try {
@@ -160,5 +171,20 @@ public class GalleryController {
 		int ret = gService.delete(g_seq);
 		
 		return "redirect:/gallery";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/file/delete/{seq}", method=RequestMethod.GET)
+	public String file_delete(@PathVariable("seq") String seq) {
+		Long g_seq = 0L;
+		try {
+			g_seq = Long.valueOf(seq);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "FAIL_SEQ";
+		}
+		
+		gService.file_delete(g_seq);
+		return "NO";
 	}
 }

@@ -6,7 +6,10 @@
 <mapper namespace="com.callor.gallery.persistance.ext.FileDao">
 
 	<select id="selectAll"></select>
-	<select id="findById"></select>
+	<select id="findById" resultType="FileDTO">
+		SELECT * FROM tbl_files
+		WHERE file_seq = #{file_seq}
+	</select>
 	
 	<!-- 개별적으로 한개 데이터씩 Insert -->
 	<insert id="insert" parameterType="FileDTO">
@@ -38,6 +41,18 @@
  			file_upname = #{file_upname}
  	</insert>
  	
+ 	<insert id="insertWithList" parameterType="FileDTO">
+ 		INSERT INTO tbl_files (file_gseq, file_original,file_upname )
+ 		VALUES
+ 		<foreach collection="filesList" item="file" separator=", ">
+ 			(
+ 				#{file.file_gseq},
+ 				#{file.file_original},
+ 				#{file.file_upname}
+ 			)
+ 		</foreach>
+ 	</insert>
+ 	
  	<!-- List<DTO>에 담긴 데이터를 Insert Or Update 수행하기 -->
  	<insert id="insertOrUpdateWithList"  parameterType="FileDTO">
  		INSERT INTO tbl_files 
@@ -59,7 +74,10 @@
  	</insert>
  	
 	<update id="update"></update>
-	<delete id="delete"></delete>
+	<delete id="delete">
+		DELETE FROM tbl_files
+		WHERE file_seq = #{file_seq}
+	</delete>
 
 	<update id="create_table">
 		CREATE TABLE IF NOT EXISTS tbl_files (

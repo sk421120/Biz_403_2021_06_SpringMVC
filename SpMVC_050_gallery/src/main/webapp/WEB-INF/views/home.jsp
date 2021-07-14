@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://kit.fontawesome.com/c3834cbadf.js" crossorigin="anonymous"></script>
 <style>
 	* {
 	box-sizing: border-box;

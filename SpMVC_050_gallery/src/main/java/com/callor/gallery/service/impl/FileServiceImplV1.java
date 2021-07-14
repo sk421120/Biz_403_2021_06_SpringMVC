@@ -96,4 +96,10 @@ public class FileServiceImplV1 implements FileService{
 		return null;
 	}
 
+	@Override
+	public int delete(String imgFileName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
